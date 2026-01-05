@@ -1,47 +1,53 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // C'est ici qu'on va lister toutes nos redirections.
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* 1. AUTORISATION DES IMAGES */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'plus.unsplash.com',
+      },
+    ],
+  },
+
+  /* 2. REDIRECTIONS SEO */
   async redirects() {
     return [
-      // -- EXEMPLES DE REDIRECTIONS --
-
-      // 1. Redirection d'une page hôtel
+      // --- HOTELS (Exemples basés sur votre fichier) ---
       {
-        source: '/Ducs-Anjou/index.htm', // L'ancienne URL
-        destination: '/hotel/hotel-ducs-d-anjou', // La future nouvelle URL
-        permanent: true, // C'est une redirection 301 (définitive)
+        source: '/Ducs-Anjou/index.htm',
+        destination: '/hotel/hotel-ducs-d-anjou',
+        permanent: true,
       },
-      // Autre exemple hôtel
       {
         source: '/Queen-Mary/index.htm',
         destination: '/hotel/hotel-queen-mary',
         permanent: true,
       },
-
-      // 2. Redirection d'une page "Activité" vers le futur blog/guide
+      // ... Vous pourrez ajouter toute la liste ici plus tard
+      
+      // --- TOURS ---
+      {
+        source: '/cityrama/moulin_rouge_show.html',
+        destination: '/tour/moulin-rouge-show',
+        permanent: true,
+      },
       {
         source: '/cityrama/lido_show/lido_show_paris.html',
-        destination: '/guide/lido-show-paris',
+        destination: '/tour/lido-de-paris',
         permanent: true,
       },
       {
         source: '/cityrama/disneyland_resort_excursions/disneyland_paris_excursions.html',
-        destination: '/guide/excursion-disneyland-paris',
+        destination: '/tour/excursion-disneyland-paris',
         permanent: true,
       },
-
-      // 3. Redirection des pages "utilitaires" vers l'accueil
-      {
-        source: '/map.htm',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/terms.htm',
-        destination: '/mentions-legales', // (page qu'on créera plus tard)
-        permanent: true,
-      },
-    ]
+    ];
   },
 };
 
